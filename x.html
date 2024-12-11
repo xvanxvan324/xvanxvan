@@ -27,9 +27,9 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            margin-right: 20px;  /* 控制头像与昵称/介绍之间的间距 */
+            margin-right: 20px;
             border: 3px solid #fff;
-            background-image: url('default-avatar.png'); /* 默认头像路径 */
+            background-image: url('default-avatar.png');
             background-size: cover;
             background-position: center;
             cursor: pointer;
@@ -46,32 +46,63 @@
             font-size: 18px;
             color: #aaa;
         }
-        /* 酷炫按钮 */
-        .upload-btn, .background-btn {
-            background: linear-gradient(45deg, #ff6ec7, #d9a7c7); /* 渐变色 */
-            color: white;
-            padding: 12px 24px;
+        /* 隐藏背景按钮 */
+        .background-btn {
+            display: none;  /* 隐藏背景更改按钮 */
+        }
+        /* 酷炫的小圆圈上传按钮 */
+        .upload-btn {
+            background: linear-gradient(45deg, #ff6ec7, #d9a7c7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             border: none;
             cursor: pointer;
-            margin: 10px 0;
-            border-radius: 5px;
-            font-size: 16px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
-            transition: background 0.3s ease, transform 0.2s ease; /* 平滑过渡效果 */
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
         }
-        .upload-btn:hover, .background-btn:hover {
-            background: linear-gradient(45deg, #d9a7c7, #ff6ec7); /* 反向渐变 */
-            transform: scale(1.1); /* 鼠标悬停时按钮放大 */
+        .upload-btn::after {
+            content: "↑";
+            font-size: 25px;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-        .upload-btn:active, .background-btn:active {
-            transform: scale(1); /* 按钮点击时还原 */
+        .upload-btn:hover {
+            background: linear-gradient(45deg, #d9a7c7, #ff6ec7);
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
+        .upload-btn:active {
+            transform: scale(1);
+        }
+        .upload-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            transform: scale(0);
+            z-index: -1;
+        }
+        .upload-btn:hover::before {
+            transform: scale(1);
+        }
+
         .button-container {
             margin-top: 30px;
             text-align: center;
         }
         .option-btn {
-            background: linear-gradient(45deg, #2193b0, #6dd5ed); /* 酷炫渐变色 */
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
             color: white;
             padding: 15px 25px;
             margin: 10px;
@@ -83,7 +114,7 @@
             transition: background 0.3s ease, transform 0.2s ease;
         }
         .option-btn:hover {
-            background: linear-gradient(45deg, #6dd5ed, #2193b0); /* 反向渐变 */
+            background: linear-gradient(45deg, #6dd5ed, #2193b0);
             transform: scale(1.05);
         }
         .option-btn:active {
@@ -111,7 +142,7 @@
             <div class="profile-info">
                 <div class="nickname" contenteditable="true" id="nickname">请输入昵称</div>
                 <div class="description" contenteditable="true" id="description">这是一段个人介绍。</div>
-                <!-- 修改背景按钮 -->
+                <!-- 修改背景按钮（已隐藏） -->
                 <button class="background-btn" onclick="changeBackground()">更改背景</button>
             </div>
         </div>
@@ -127,17 +158,20 @@
         <div class="document-list" id="option1" style="display:none;">
             <h3>选项 1 文档</h3>
             <input type="file" id="document-upload-1" onchange="uploadDocument('option1')" />
-            <button class="upload-btn" onclick="document.getElementById('document-upload-1').click();">上传文档</button>
+            <!-- 上传文档按钮 -->
+            <button class="upload-btn" onclick="document.getElementById('document-upload-1').click();"></button>
         </div>
         <div class="document-list" id="option2" style="display:none;">
             <h3>选项 2 文档</h3>
             <input type="file" id="document-upload-2" onchange="uploadDocument('option2')" />
-            <button class="upload-btn" onclick="document.getElementById('document-upload-2').click();">上传文档</button>
+            <!-- 上传文档按钮 -->
+            <button class="upload-btn" onclick="document.getElementById('document-upload-2').click();"></button>
         </div>
         <div class="document-list" id="option3" style="display:none;">
             <h3>选项 3 文档</h3>
             <input type="file" id="document-upload-3" onchange="uploadDocument('option3')" />
-            <button class="upload-btn" onclick="document.getElementById('document-upload-3').click();">上传文档</button>
+            <!-- 上传文档按钮 -->
+            <button class="upload-btn" onclick="document.getElementById('document-upload-3').click();"></button>
         </div>
     </div>
 
@@ -155,7 +189,7 @@
             }
         }
 
-        // 修改背景的功能
+        // 修改背景的功能（已隐藏）
         function changeBackground() {
             const newBackground = prompt("请输入新的背景图片 URL:");
             if (newBackground) {
