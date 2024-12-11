@@ -32,7 +32,6 @@
             background-image: url('default-avatar.png');
             background-size: cover;
             background-position: center;
-            cursor: pointer;
         }
         .profile-info {
             text-align: left;
@@ -70,38 +69,6 @@
             transform: translateY(0);
         }
 
-        /* 小圆圈上传文档按钮 */
-        .upload-btn {
-            background: linear-gradient(45deg, #ff6ec7, #d9a7c7);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            margin: 20px;
-        }
-        .upload-btn::after {
-            content: "↑";
-            font-size: 30px;
-            color: white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .upload-btn:hover {
-            background: linear-gradient(45deg, #d9a7c7, #ff6ec7);
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        .upload-btn:active {
-            transform: scale(1);
-        }
-
         .button-container {
             margin-top: 30px;
             text-align: center;
@@ -113,8 +80,18 @@
             padding-left: 20px;
         }
 
-        input[type="file"] {
-            display: none;
+        /* 使文本内容可编辑 */
+        .editable-content {
+            background-color: #333;
+            border: 1px solid #444;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 100px;
+            margin-top: 10px;
+            font-size: 18px;
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -123,9 +100,8 @@
     <div class="container">
         <!-- 个人主页头部 -->
         <div class="profile-header">
-            <!-- 头像上传框 -->
-            <div class="avatar" onclick="document.getElementById('avatar-upload').click();"></div>
-            <input type="file" id="avatar-upload" onchange="uploadAvatar()" />
+            <!-- 头像静态展示，不可更改 -->
+            <div class="avatar"></div>
             <div class="profile-info">
                 <div class="nickname" contenteditable="true" id="nickname">Rey</div>
                 <div class="description" contenteditable="true" id="description">最混沌的骚乱也精密有致</div>
@@ -139,41 +115,22 @@
             <button class="button" onclick="toggleDocuments('option3')">Eye</button>
         </div>
 
-        <!-- 文档列表 -->
+        <!-- 文档内容部分 -->
         <div class="document-list" id="option1" style="display:none;">
             <h3>Babel 文档</h3>
-            <input type="file" id="document-upload-1" onchange="uploadDocument('option1')" />
-            <!-- 上传文档按钮 -->
-            <button class="upload-btn" onclick="document.getElementById('document-upload-1').click();"></button>
+            <div class="editable-content" contenteditable="true" id="document1">这里可以编辑Babel文档的内容。</div>
         </div>
         <div class="document-list" id="option2" style="display:none;">
             <h3>Lord of War 文档</h3>
-            <input type="file" id="document-upload-2" onchange="uploadDocument('option2')" />
-            <!-- 上传文档按钮 -->
-            <button class="upload-btn" onclick="document.getElementById('document-upload-2').click();"></button>
+            <div class="editable-content" contenteditable="true" id="document2">这里可以编辑Lord of War文档的内容。</div>
         </div>
         <div class="document-list" id="option3" style="display:none;">
             <h3>Eye 文档</h3>
-            <input type="file" id="document-upload-3" onchange="uploadDocument('option3')" />
-            <!-- 上传文档按钮 -->
-            <button class="upload-btn" onclick="document.getElementById('document-upload-3').click();"></button>
+            <div class="editable-content" contenteditable="true" id="document3">这里可以编辑Eye文档的内容。</div>
         </div>
     </div>
 
     <script>
-        // 修改头像的功能
-        function uploadAvatar() {
-            const avatarInput = document.getElementById('avatar-upload');
-            const file = avatarInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.querySelector('.avatar').style.backgroundImage = 'url(' + e.target.result + ')';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
         // 切换文档显示的功能
         function toggleDocuments(option) {
             const options = document.querySelectorAll('.document-list');
@@ -184,15 +141,6 @@
                     el.style.display = 'none';
                 }
             });
-        }
-
-        // 上传文档的功能
-        function uploadDocument(option) {
-            const fileInput = document.getElementById('document-upload-' + option.charAt(option.length - 1));
-            const file = fileInput.files[0];
-            if (file) {
-                alert("您已成功上传文档：" + file.name);
-            }
         }
     </script>
 
