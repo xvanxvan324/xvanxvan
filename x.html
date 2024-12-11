@@ -1,140 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人主页</title>
     <style>
-        /* 设置整个页面的背景颜色和字体 */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 页面顶部背景和个人头像 */
-        .header {
-            background-image: url('your-background-image.jpg'); /* 设置背景图 */
-            background-size: cover;
-            height: 250px;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
-
-        .header img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 3px solid white;
-        }
-
-        .header h1 {
-            margin-top: 80px;
-            font-size: 30px;
-        }
-
-        .header p {
-            font-size: 18px;
-        }
-
-        /* 个人主页的按钮选项区域 */
-        .button-container {
-            margin: 20px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .button-container button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .button-container button:hover {
-            background-color: #45a049;
-        }
-
-        /* 选项区域 */
-        .content {
-            display: none;
             background-color: black;
             color: white;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .profile-header {
+            margin-top: 50px;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #fff;
+            background-image: url('default-avatar.png'); /* 默认头像路径 */
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+        .nickname {
+            font-size: 30px;
+            margin-top: 10px;
+        }
+        .description {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #aaa;
+        }
+        .upload-btn, .background-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .upload-btn:hover, .background-btn:hover {
+            background-color: #45a049;
+        }
+        .button-container {
+            margin-top: 30px;
+        }
+        .option-btn {
+            background-color: #555;
+            color: white;
+            padding: 15px 25px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .option-btn:hover {
+            background-color: #777;
+        }
+        .document-list {
             margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+            padding-left: 20px;
         }
-
-        .content.active {
-            display: block;
+        input[type="file"] {
+            display: none;
         }
-
-        .content h2 {
-            margin-top: 0;
-        }
-
-        .content p {
-            font-size: 16px;
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- 个人主页头部 -->
-    <div class="header">
-        <img src="your-avatar.jpg" alt="头像"> <!-- 头像图片 -->
-        <h1>张三</h1>
-        <p>这是我的个人主页，欢迎访问！</p>
-    </div>
+    <div class="container">
+        <!-- 个人主页头部 -->
+        <div class="profile-header">
+            <!-- 头像上传框 -->
+            <div class="avatar" onclick="document.getElementById('avatar-upload').click();"></div>
+            <input type="file" id="avatar-upload" onchange="uploadAvatar()" />
+            <div class="nickname" contenteditable="true" id="nickname">请输入昵称</div>
+            <div class="description" contenteditable="true" id="description">这是一段个人介绍。</div>
+            
+            <!-- 修改背景按钮 -->
+            <button class="background-btn" onclick="changeBackground()">更改背景</button>
+        </div>
 
-    <!-- 按钮选项 -->
-    <div class="button-container">
-        <button onclick="toggleContent('option1')">选项1</button>
-        <button onclick="toggleContent('option2')">选项2</button>
-        <button onclick="toggleContent('option3')">选项3</button>
-    </div>
+        <!-- 按钮选项 -->
+        <div class="button-container">
+            <button class="option-btn" onclick="toggleDocuments('option1')">选项 1</button>
+            <button class="option-btn" onclick="toggleDocuments('option2')">选项 2</button>
+            <button class="option-btn" onclick="toggleDocuments('option3')">选项 3</button>
+        </div>
 
-    <!-- 各个选项内容区域 -->
-    <div id="option1" class="content">
-        <h2>选项1内容</h2>
-        <p>这里是选项1的内容区域，包含文档1、文档2、文档3。</p>
-        <p>文档1内容...</p>
-        <p>文档2内容...</p>
-        <p>文档3内容...</p>
-    </div>
-
-    <div id="option2" class="content">
-        <h2>选项2内容</h2>
-        <p>这里是选项2的内容区域，包含文档1、文档2。</p>
-        <p>文档1内容...</p>
-        <p>文档2内容...</p>
-    </div>
-
-    <div id="option3" class="content">
-        <h2>选项3内容</h2>
-        <p>这里是选项3的内容区域，包含文档1。</p>
-        <p>文档1内容...</p>
+        <!-- 文档列表 -->
+        <div class="document-list" id="option1" style="display:none;">
+            <h3>选项 1 文档</h3>
+            <input type="file" id="document-upload-1" onchange="uploadDocument('option1')" />
+            <button class="upload-btn" onclick="document.getElementById('document-upload-1').click();">上传文档</button>
+        </div>
+        <div class="document-list" id="option2" style="display:none;">
+            <h3>选项 2 文档</h3>
+            <input type="file" id="document-upload-2" onchange="uploadDocument('option2')" />
+            <button class="upload-btn" onclick="document.getElementById('document-upload-2').click();">上传文档</button>
+        </div>
+        <div class="document-list" id="option3" style="display:none;">
+            <h3>选项 3 文档</h3>
+            <input type="file" id="document-upload-3" onchange="uploadDocument('option3')" />
+            <button class="upload-btn" onclick="document.getElementById('document-upload-3').click();">上传文档</button>
+        </div>
     </div>
 
     <script>
-        // 切换选项显示内容
-        function toggleContent(optionId) {
-            const options = document.querySelectorAll('.content');
-            options.forEach(option => {
-                option.classList.remove('active');
+        // 修改头像的功能
+        function uploadAvatar() {
+            const avatarInput = document.getElementById('avatar-upload');
+            const file = avatarInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.querySelector('.avatar').style.backgroundImage = 'url(' + e.target.result + ')';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 修改背景的功能
+        function changeBackground() {
+            const newBackground = prompt("请输入新的背景图片 URL:");
+            if (newBackground) {
+                document.body.style.backgroundImage = 'url(' + newBackground + ')';
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+            }
+        }
+
+        // 切换文档显示的功能
+        function toggleDocuments(option) {
+            const options = document.querySelectorAll('.document-list');
+            options.forEach(function (el) {
+                if (el.id === option) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
             });
-            const selectedOption = document.getElementById(optionId);
-            selectedOption.classList.add('active');
+        }
+
+        // 上传文档的功能
+        function uploadDocument(option) {
+            const fileInput = document.getElementById('document-upload-' + option.charAt(option.length - 1));
+            const file = fileInput.files[0];
+            if (file) {
+                alert("您已成功上传文档：" + file.name);
+            }
         }
     </script>
+
 </body>
 </html>
