@@ -5,198 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人主页</title>
     <style>
+        /* 设置整个页面的背景颜色和字体 */
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg') no-repeat center center fixed;
+        }
+
+        /* 页面顶部背景和个人头像 */
+        .header {
+            background-image: url('your-background-image.jpg'); /* 设置背景图 */
             background-size: cover;
+            height: 250px;
             color: white;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            width: 100%;
-            height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .profile {
             text-align: center;
-            margin-bottom: 20px;
+            position: relative;
         }
 
-        .profile img {
+        .header img {
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            border: 5px solid white;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px solid white;
         }
 
-        .profile h1 {
-            font-size: 2.5em;
-            margin-top: 10px;
+        .header h1 {
+            margin-top: 80px;
+            font-size: 30px;
         }
 
-        .profile p {
-            font-size: 1.2em;
-            color: #ccc;
+        .header p {
+            font-size: 18px;
         }
 
-        .buttons {
+        /* 个人主页的按钮选项区域 */
+        .button-container {
+            margin: 20px;
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
+            justify-content: space-around;
         }
 
-        .button {
+        .button-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             padding: 15px 30px;
-            font-size: 1.2em;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
-            border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
-            transition: 0.3s;
+            border-radius: 5px;
         }
 
-        .button:hover {
-            background-color: rgba(255, 255, 255, 0.6);
+        .button-container button:hover {
+            background-color: #45a049;
         }
 
-        .documents {
-            width: 80%;
-            max-width: 1000px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+        /* 选项区域 */
+        .content {
             display: none;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .document-list {
-            list-style: none;
-            padding: 0;
-            width: 100%;
-        }
-
-        .document-list li {
-            margin: 10px 0;
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .document-list li button {
-            background-color: rgba(255, 0, 0, 0.7);
+            background-color: black;
             color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .document-list li button:hover {
-            background-color: rgba(255, 0, 0, 1);
-        }
-
-        #addDocButton {
+            padding: 20px;
             margin-top: 20px;
-            padding: 10px 20px;
-            background-color: rgba(0, 255, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-        #addDocButton:hover {
-            background-color: rgba(0, 255, 0, 1);
+        .content.active {
+            display: block;
         }
+
+        .content h2 {
+            margin-top: 0;
+        }
+
+        .content p {
+            font-size: 16px;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- 个人主页 -->
-    <div class="profile">
-        <img src="https://via.placeholder.com/150" alt="头像">
-        <h1>我的名字</h1>
-        <p>欢迎来到我的主页！这是我的个人空间。</p>
+    <!-- 个人主页头部 -->
+    <div class="header">
+        <img src="your-avatar.jpg" alt="头像"> <!-- 头像图片 -->
+        <h1>张三</h1>
+        <p>这是我的个人主页，欢迎访问！</p>
     </div>
 
     <!-- 按钮选项 -->
-    <div class="buttons">
-        <button class="button" onclick="showDocuments('docs1')">我的文件 1</button>
-        <button class="button" onclick="showDocuments('docs2')">我的文件 2</button>
-        <button class="button" onclick="showDocuments('docs3')">我的文件 3</button>
+    <div class="button-container">
+        <button onclick="toggleContent('option1')">选项1</button>
+        <button onclick="toggleContent('option2')">选项2</button>
+        <button onclick="toggleContent('option3')">选项3</button>
     </div>
 
-    <!-- 文件展示区域 -->
-    <div id="docs1" class="documents">
-        <h2>我的文件 1</h2>
-        <ul class="document-list">
-            <li>文档 1 <button onclick="deleteDocument('docs1', this)">删除</button></li>
-            <li>文档 2 <button onclick="deleteDocument('docs1', this)">删除</button></li>
-        </ul>
-        <button id="addDocButton" onclick="addDocument('docs1')">添加文档</button>
+    <!-- 各个选项内容区域 -->
+    <div id="option1" class="content">
+        <h2>选项1内容</h2>
+        <p>这里是选项1的内容区域，包含文档1、文档2、文档3。</p>
+        <p>文档1内容...</p>
+        <p>文档2内容...</p>
+        <p>文档3内容...</p>
     </div>
 
-    <div id="docs2" class="documents">
-        <h2>我的文件 2</h2>
-        <ul class="document-list">
-            <li>文档 A <button onclick="deleteDocument('docs2', this)">删除</button></li>
-        </ul>
-        <button id="addDocButton" onclick="addDocument('docs2')">添加文档</button>
+    <div id="option2" class="content">
+        <h2>选项2内容</h2>
+        <p>这里是选项2的内容区域，包含文档1、文档2。</p>
+        <p>文档1内容...</p>
+        <p>文档2内容...</p>
     </div>
 
-    <div id="docs3" class="documents">
-        <h2>我的文件 3</h2>
-        <ul class="document-list">
-            <li>文件 1 <button onclick="deleteDocument('docs3', this)">删除</button></li>
-        </ul>
-        <button id="addDocButton" onclick="addDocument('docs3')">添加文档</button>
+    <div id="option3" class="content">
+        <h2>选项3内容</h2>
+        <p>这里是选项3的内容区域，包含文档1。</p>
+        <p>文档1内容...</p>
     </div>
-</div>
 
-<script>
-    // 显示文件列表
-    function showDocuments(docId) {
-        const allDocs = document.querySelectorAll('.documents');
-        allDocs.forEach(doc => {
-            if (doc.id === docId) {
-                doc.style.display = 'flex';
-            } else {
-                doc.style.display = 'none';
-            }
-        });
-    }
-
-    // 添加文档
-    function addDocument(docId) {
-        const docList = document.querySelector(`#${docId} .document-list`);
-        const newDocument = prompt("请输入新文档名称:");
-        if (newDocument) {
-            const newDocItem = document.createElement('li');
-            newDocItem.innerHTML = `${newDocument} <button onclick="deleteDocument('${docId}', this)">删除</button>`;
-            docList.appendChild(newDocItem);
+    <script>
+        // 切换选项显示内容
+        function toggleContent(optionId) {
+            const options = document.querySelectorAll('.content');
+            options.forEach(option => {
+                option.classList.remove('active');
+            });
+            const selectedOption = document.getElementById(optionId);
+            selectedOption.classList.add('active');
         }
-    }
-
-    // 删除文档
-    function deleteDocument(docId, button) {
-        const docList = document.querySelector(`#${docId} .document-list`);
-        docList.removeChild(button.parentElement);
-    }
-</script>
-
+    </script>
 </body>
 </html>
