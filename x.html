@@ -80,8 +80,8 @@
             padding-left: 20px;
         }
 
-        /* 使文本内容可编辑 */
-        .editable-content {
+        /* 文本区域样式 */
+        .static-content {
             background-color: #333;
             border: 1px solid #444;
             color: white;
@@ -92,6 +92,7 @@
             font-size: 18px;
             width: 100%;
             box-sizing: border-box;
+            white-space: pre-wrap;
         }
     </style>
 </head>
@@ -103,46 +104,38 @@
             <!-- 头像静态展示，不可更改 -->
             <div class="avatar"></div>
             <div class="profile-info">
-                <div class="nickname" contenteditable="true" id="nickname">Rey</div>
-                <div class="description" contenteditable="true" id="description">最混沌的骚乱也精密有致</div>
+                <div class="nickname">Rey</div>
+                <div class="description">最混沌的骚乱也精密有致</div>
             </div>
         </div>
 
         <!-- 按钮选项 -->
         <div class="button-container">
-            <button class="button" onclick="toggleDocuments('option1')">Babel</button>
-            <button class="button" onclick="toggleDocuments('option2')">Lord of War</button>
-            <button class="button" onclick="toggleDocuments('option3')">Eye</button>
+            <button class="button">Babel</button>
+            <button class="button">Lord of War</button>
+            <button class="button">Eye</button>
         </div>
 
         <!-- 文档内容部分 -->
-        <div class="document-list" id="option1" style="display:none;">
+        <div class="document-list" id="option1">
             <h3>Babel 文档</h3>
-            <div class="editable-content" contenteditable="true" id="document1">这里可以编辑Babel文档的内容。</div>
+            <div class="static-content">
+                这里是静态的Babel文档内容，无法编辑。如果需要更改内容，请修改源代码。
+            </div>
         </div>
-        <div class="document-list" id="option2" style="display:none;">
+        <div class="document-list" id="option2">
             <h3>Lord of War 文档</h3>
-            <div class="editable-content" contenteditable="true" id="document2">这里可以编辑Lord of War文档的内容。</div>
+            <div class="static-content">
+                这里是静态的Lord of War文档内容，无法编辑。如果需要更改内容，请修改源代码。
+            </div>
         </div>
-        <div class="document-list" id="option3" style="display:none;">
+        <div class="document-list" id="option3">
             <h3>Eye 文档</h3>
-            <div class="editable-content" contenteditable="true" id="document3">这里可以编辑Eye文档的内容。</div>
+            <div class="static-content">
+                这里是静态的Eye文档内容，无法编辑。如果需要更改内容，请修改源代码。
+            </div>
         </div>
     </div>
-
-    <script>
-        // 切换文档显示的功能
-        function toggleDocuments(option) {
-            const options = document.querySelectorAll('.document-list');
-            options.forEach(function (el) {
-                if (el.id === option) {
-                    el.style.display = 'block';
-                } else {
-                    el.style.display = 'none';
-                }
-            });
-        }
-    </script>
 
 </body>
 </html>
