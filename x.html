@@ -10,24 +10,32 @@
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
         .container {
             width: 80%;
             margin: 0 auto;
         }
         .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-top: 50px;
         }
         .avatar {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-right: 20px;
             border: 3px solid #fff;
             background-image: url('default-avatar.png'); /* 默认头像路径 */
             background-size: cover;
             background-position: center;
             cursor: pointer;
+        }
+        .profile-info {
+            text-align: left;
         }
         .nickname {
             font-size: 30px;
@@ -52,6 +60,7 @@
         }
         .button-container {
             margin-top: 30px;
+            text-align: center;
         }
         .option-btn {
             background-color: #555;
@@ -85,11 +94,12 @@
             <!-- 头像上传框 -->
             <div class="avatar" onclick="document.getElementById('avatar-upload').click();"></div>
             <input type="file" id="avatar-upload" onchange="uploadAvatar()" />
-            <div class="nickname" contenteditable="true" id="nickname">请输入昵称</div>
-            <div class="description" contenteditable="true" id="description">这是一段个人介绍。</div>
-            
-            <!-- 修改背景按钮 -->
-            <button class="background-btn" onclick="changeBackground()">更改背景</button>
+            <div class="profile-info">
+                <div class="nickname" contenteditable="true" id="nickname">请输入昵称</div>
+                <div class="description" contenteditable="true" id="description">这是一段个人介绍。</div>
+                <!-- 修改背景按钮 -->
+                <button class="background-btn" onclick="changeBackground()">更改背景</button>
+            </div>
         </div>
 
         <!-- 按钮选项 -->
