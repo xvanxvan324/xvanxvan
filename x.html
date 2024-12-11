@@ -46,24 +46,32 @@
             font-size: 18px;
             color: #aaa;
         }
+        /* 酷炫按钮 */
         .upload-btn, .background-btn {
-            background-color: #4CAF50;
+            background: linear-gradient(45deg, #ff6ec7, #d9a7c7); /* 渐变色 */
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
             margin: 10px 0;
             border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            transition: background 0.3s ease, transform 0.2s ease; /* 平滑过渡效果 */
         }
         .upload-btn:hover, .background-btn:hover {
-            background-color: #45a049;
+            background: linear-gradient(45deg, #d9a7c7, #ff6ec7); /* 反向渐变 */
+            transform: scale(1.1); /* 鼠标悬停时按钮放大 */
+        }
+        .upload-btn:active, .background-btn:active {
+            transform: scale(1); /* 按钮点击时还原 */
         }
         .button-container {
             margin-top: 30px;
             text-align: center;
         }
         .option-btn {
-            background-color: #555;
+            background: linear-gradient(45deg, #2193b0, #6dd5ed); /* 酷炫渐变色 */
             color: white;
             padding: 15px 25px;
             margin: 10px;
@@ -71,9 +79,15 @@
             cursor: pointer;
             font-size: 18px;
             border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
         }
         .option-btn:hover {
-            background-color: #777;
+            background: linear-gradient(45deg, #6dd5ed, #2193b0); /* 反向渐变 */
+            transform: scale(1.05);
+        }
+        .option-btn:active {
+            transform: scale(1);
         }
         .document-list {
             margin-top: 20px;
