@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>泥嚎！</title>
+    <title>数据集</title>
     <style>
         body {
             background-color: black;
@@ -76,11 +76,11 @@
         .document-list {
             margin-top: 20px;
             text-align: left;
-            display: inline-block;
+            display: none;  /* 默认隐藏所有文档内容 */
             padding-left: 20px;
         }
 
-        /* 文本区域样式 */
+        /* 文本框样式 */
         .static-content {
             background-color: #333;
             border: 1px solid #444;
@@ -111,31 +111,45 @@
 
         <!-- 按钮选项 -->
         <div class="button-container">
-            <button class="button">Babel</button>
-            <button class="button">Lord of War</button>
-            <button class="button">Eye</button>
+            <button class="button" onclick="toggleDocuments('option1')">Babel</button>
+            <button class="button" onclick="toggleDocuments('option2')">Lord of War</button>
+            <button class="button" onclick="toggleDocuments('option3')">Eye</button>
         </div>
 
         <!-- 文档内容部分 -->
         <div class="document-list" id="option1">
             <h3>Babel 文档</h3>
             <div class="static-content">
-                这里是静态的Babel文档内容，无法编辑。如果需要更改内容，请修改源代码。
+                这里是Babel文档的静态内容。如果需要更改内容，请修改源代码。
             </div>
         </div>
         <div class="document-list" id="option2">
             <h3>Lord of War 文档</h3>
             <div class="static-content">
-                这里是静态的Lord of War文档内容，无法编辑。如果需要更改内容，请修改源代码。
+                这里是Lord of War文档的静态内容。如果需要更改内容，请修改源代码。
             </div>
         </div>
         <div class="document-list" id="option3">
             <h3>Eye 文档</h3>
             <div class="static-content">
-                这里是静态的Eye文档内容，无法编辑。如果需要更改内容，请修改源代码。
+                这里是Eye文档的静态内容。如果需要更改内容，请修改源代码。
             </div>
         </div>
     </div>
+
+    <script>
+        // 切换文档显示的功能
+        function toggleDocuments(option) {
+            const options = document.querySelectorAll('.document-list');
+            options.forEach(function (el) {
+                if (el.id === option) {
+                    el.style.display = 'block';  // 显示被点击的文档
+                } else {
+                    el.style.display = 'none';   // 隐藏其他文档
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
