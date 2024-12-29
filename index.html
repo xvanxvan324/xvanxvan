@@ -46,7 +46,6 @@
             color: #aaa;
         }
 
-        /* 重新设计的酷炫按钮 */
         .button {
             background: linear-gradient(45deg, #9b59b6, #8e44ad);
             color: white;
@@ -80,7 +79,6 @@
             padding-left: 20px;
         }
 
-        /* 文本框样式 */
         .static-content {
             background-color: #333;
             border: 1px solid #444;
@@ -94,14 +92,18 @@
             box-sizing: border-box;
             white-space: pre-wrap;
         }
+
+        /* 音频播放器样式 */
+        .audio-player-container {
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 个人主页头部 -->
         <div class="profile-header">
-            <!-- 头像静态展示，不可更改 -->
             <div class="avatar"></div>
             <div class="profile-info">
                 <div class="nickname">Rey</div>
@@ -109,7 +111,6 @@
             </div>
         </div>
 
-        <!-- 按钮选项 -->
         <div class="button-container">
             <button class="button" onclick="toggleDocuments('option1')">Babel</button>
             <button class="button" onclick="toggleDocuments('option2')">Lord of War</button>
@@ -126,49 +127,13 @@
         <div class="document-list" id="option2">
             <h3>数字根</h3>
             <div class="static-content">
-                1. 各个位相加，加到个位为止
-                2. mod 9
-                3. 如果被计算的数字位数庞大，那么消除掉所有0
-                   再将对应的数消除掉1-9，2-8，3-7，4-6，5-5
-                   如果所剩依旧不是个位数，那么所剩数字：
-                   99-93=84=75=66
-                   98-94=85=76
-                   97，88-95=86=77
-                   87-87
-                   96-96
-                   96-87
-                   （此方法未必能够完全筛除干净，但筛除过后剩下的数一定很简单，我主张算速越快越好，但这就好比龟兔赛跑，想要达到极致的快就必须先慢下来。
-                    如果想要通过完全筛除来得到结果，那么不妨将那些不能被筛除的数全部找出来列表记录结果，不过这在某种情况下多此一举，所以走到这一步究竟是应该眼爆呢，还是列表筛除呢，还是mod 9呢，需要看情况而定。)
-                    (os：其实我觉得有这个以后mod 9就显得很没有存在感了......)
+                <!-- 省略内容 -->
             </div>
-             <h3>计数质数</h3>
+            <h3>计数质数</h3>
             <div class="static-content">
-                1.埃拉托斯特尼筛法:去除0和1后去除所有数的倍数(这个方法的问题是定义域只能从0开始)
+                <!-- 省略内容 -->
             </div>
-        </div>
-        <div class="document-list" id="option3">
-            <h3>Eye 文档</h3>
-            <div class="static-content">
-               emmm
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // 切换文档显示的功能
-        function toggleDocuments(option) {
-            const options = document.querySelectorAll('.document-list');
-            options.forEach(function (el) {
-                if (el.id === option) {
-                    el.style.display = 'block';  // 显示被点击的文档
-                } else {
-                    el.style.display = 'none';   // 隐藏其他文档
-                }
-            });
-        }
-    </script>
-    <script defer src="https://cdn.commento.io/js/commento.js"></script>
-<div id="commento"></div>
-
-</body>
-</html>
+            <!-- 添加音频播放器 -->
+            <div class="audio-player-container">
+                <audio controls>
+                    <source src="https://your-path-to-audio-file.mp3" type="a
