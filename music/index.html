@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- begin open graph tags -->
+    <meta property="og:title" content="Music Player" />
+    <meta property="og:type" content="website" />
+    <!-- end open graph tags -->
+    <!-- begin traditional metadata tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- end traditional metadata tags -->
+    <title>Music Share</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./img/logo.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="text">
+          <p>有人与你分享了这首歌，<br>
+            <p2>好好享受！</p2></p>
+       </div>
+    <div class="player-container">
+      <!-- song -->
+      <div class="img-container">
+        <img
+          src="./img/logo.png"
+          alt=" "
+        />
+      </div>
+      <h2 id="title"></h2>
+      <h3 id="artist"></h3>
+      <audio src=""></audio>
+      <!-- progress -->
+      <div class="progress-container" id="progress-container">
+        <!-- this progress is the seek of the song, as the song goes -->
+        <div class="progress" id="progress"></div>
+        <div class="duration-wrapper">
+          <span id="current-time">0:00</span>
+          <span id="duration">Waiting to play</span>
+        </div>
+      </div>
+      <!-- controls  -->
+      <div class="player-controls">
+        <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
+        <i class="fa-solid fa-play main-button" id="play" title="Play"></i>
+        <i class="fa-solid fa-forward" id="next" title="Next"></i>
+      </div>
+    </div>
+    <!-- script -->
+    <script src="./script.js"></script>
+  </body>
+</html>
