@@ -24,14 +24,14 @@
             margin-top: 50px;
         }
         .avatar {
-            width: 150px; /* 默认大小 */
-            height: 150px; /* 默认大小 */
-            border-radius: 50%; /* 圆形 */
+            width: 150px; /* 设置固定的头像框宽度 */
+            height: 150px; /* 设置固定的头像框高度 */
+            border-radius: 50%; /* 使头像框为圆形 */
             margin-right: 20px;
             border: 3px solid #fff;
-            background-image: url('ab.jpg'); /* 这里使用了一个默认的背景图片 */
-            background-size: cover; /* 保持背景图按比例缩放 */
-            background-position: center; /* 确保背景图在框内居中 */
+            background-image: url('aaa.jpg'); /* 头像图片 */
+            background-size: cover; /* 保证背景图按比例缩放 */
+            background-position: center; /* 保证背景图居中显示 */
         }
         .profile-info {
             text-align: left;
@@ -99,18 +99,19 @@
             text-align: center;
         }
 
-        /* 响应式设计：对于小屏幕（手机端）调整头像大小 */
+        /* 响应式设计：对于小屏幕（手机端）调整布局 */
         @media (max-width: 768px) {
+            /* 如果你希望头像在较小设备上仍然保持同样大小，可以去除任何相关的缩放 */
             .avatar {
-                width: 120px;  /* 在手机端缩小头像框 */
-                height: 120px; /* 同上 */
+                width: 150px;  /* 固定大小 */
+                height: 150px; /* 固定大小 */
             }
         }
 
         @media (max-width: 480px) {
             .avatar {
-                width: 100px;  /* 在更小的手机端进一步缩小 */
-                height: 100px; /* 同上 */
+                width: 150px;  /* 固定大小 */
+                height: 150px; /* 固定大小 */
             }
         }
     </style>
