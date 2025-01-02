@@ -6,12 +6,19 @@
     <title>数据集</title>
     <style>
         body {
-            background-color: black;
-            color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark {
+            background-color: black;
+            color: white;
+        }
+        body.light {
+            background-color: white;
+            color: black;
         }
         .container {
             width: 80%;
@@ -23,32 +30,16 @@
             justify-content: center;
             margin-top: 50px;
         }
-       .avatar {
-    width: 150px; /* 默认大小 */
-    height: 150px; /* 默认大小 */
-    border-radius: 50%; /* 圆形 */
-    margin-right: 20px;
-    border: 3px solid #fff;
-    background-image: url('ab.jpg');
-    background-size: cover; /* 保持背景图按比例缩放 */
-    background-position: center; /* 确保背景图在框内居中 */
-}
-
-/* 响应式设计：对于小屏幕（手机端）调整头像大小 */
-@media (max-width: 768px) {
-    .avatar {
-        width: 120px;  /* 在手机端缩小头像框 */
-        height: 120px; /* 同上 */
-    }
-}
-
-@media (max-width: 480px) {
-    .avatar {
-        width: 100px;  /* 在更小的手机端进一步缩小 */
-        height: 100px; /* 同上 */
-    }
-}
-
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid currentColor;
+            background-image: url('image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
         .profile-info {
             text-align: left;
         }
@@ -59,12 +50,8 @@
         .description {
             margin-top: 10px;
             font-size: 18px;
-            color: #aaa;
         }
-
         .button {
-            background: linear-gradient(45deg, #9b59b6, #8e44ad);
-            color: white;
             padding: 12px 30px;
             border: none;
             cursor: pointer;
@@ -76,47 +63,74 @@
             display: inline-block;
         }
         .button:hover {
-            background: linear-gradient(45deg, #9b59b6, #8e44ad);
             transform: translateY(-5px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
         .button:active {
             transform: translateY(0);
         }
-
+        .theme-toggle {
+            margin: 20px;
+        }
         .button-container {
             margin-top: 30px;
             text-align: center;
+            border: 2px solid #555;
+            padding: 20px;
+            border-radius: 10px;
         }
-        .document-list {
+        .content {
             margin-top: 20px;
             text-align: left;
-            display: none;  /* 默认隐藏所有文档内容 */
-            padding-left: 20px;
-        }
-
-        .static-content {
             background-color: #333;
-            border: 1px solid #444;
             color: white;
             padding: 15px;
             border-radius: 10px;
             min-height: 100px;
-            margin-top: 10px;
             font-size: 18px;
-            width: 100%;
-            box-sizing: border-box;
             white-space: pre-wrap;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* 音频播放器样式 */
-        .audio-player-container {
-            margin-top: 20px;
-            text-align: center;
+        /* Dark Theme Button Styles */
+        body.dark .button {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+        body.dark .theme-toggle {
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            color: white;
+        }
+        body.light .button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+        body.light .theme-toggle {
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
+            color: white;
+        }
+        .del {
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin: 10px;
+            display: inline-block;
+            color: #ffffff;
+            background-color: #333;
         }
     </style>
 </head>
-<body>
+<body class="dark">
 
     <div class="container">
         <div class="profile-header">
@@ -128,28 +142,91 @@
         </div>
 
         <div class="button-container">
-            <button class="button" onclick="toggleDocuments('option1')">Babel</button>
-            <button class="button" onclick="toggleDocuments('option2')">Lord of War</button>
-            <button class="button" onclick="toggleDocuments('option3')">Eye</button>
+            <button class="button" onclick="showContent('L1')">高斯谈数论</button>
+            <button class="button" onclick="showContent('L2')">远山启谈数论</button>
+            <button class="button" onclick="showContent('L3')">复杂度因子</button>
+            <button class="button" onclick="showContent('L4')">向量加法</button>
+            <button class="button" onclick="showContent('L5')">因子空间</button>
+            <button class="button" onclick="showContent('L6')">210，720，175560和17297280</button>
         </div>
 
-        <!-- 文档内容部分 -->
-        <div class="document-list" id="option1">
-            <h3>Babel 文档</h3>
-            <div class="static-content">
-                emmmm
-            </div>
+        <button id="themeToggle" class="button theme-toggle" onclick="toggleTheme()">切换到明亮主题</button>
+        <button class="del" onclick="resetContent()">关闭文章</button>
+
+        <div class="content" id="contentArea">
+            <!-- 默认内容 -->
+            点击上方按钮以显示文章内容。
         </div>
-        <div class="document-list" id="option2">
-            <h3>数字根</h3>
-            <div class="static-content">
-                <!-- 省略内容 -->
-            </div>
-            <h3>计数质数</h3>
-            <div class="static-content">
-                <!-- 省略内容 -->
-            </div>
-            <!-- 添加音频播放器 -->
-            <div class="audio-player-container">
-                <audio controls>
-                    <source src="https://your-path-to-audio-file.mp3" type="a
+        <div id="commento"></div>
+    </div>
+
+    <script>
+        let clickCounts = {
+            L1: 0,
+            L2: 0,
+            L3: 0,
+            L4: 0,
+            L5: 0,
+            L6: 0
+        };
+
+        function showContent(topic) {
+            const contentArea = document.getElementById('contentArea');
+            let content;
+
+            switch (topic) {
+                case 'L1':
+                    content = "数学王子高斯(C. F. Gauss)有一句名言：“数学是科学的女王”；他又讲“数论是数学的王冠”。正如他所说，数论在数学中一直处于醒目的地位。18世纪的领袖数学家拉格朗日(J. L. Lagrange)有一个著名的定理，即任何一个正整数都能写成四个整数的平方和。这个定理是费马(Fermat)早年的猜测，与拉格朗日同时代的大数学家欧拉(L. Euler)曾经给出一个不完整的证明。第一个完整的证明是拉格朗日给出的。他在完成这个工作之后很感慨，在给欧拉的一封信中，他说：“对我来讲，算术是最难的。”这里，算术就是数论。这是拉格朗日对数论的评价。";
+                    break;
+                case 'L2':
+                    content = "远山启的《数学女王的邀请：初等数论入门》是初等数论入门的通俗科普读本，书中以身边的生活之事为例，由浅入深、生动形象地介绍了数的奇妙性质与规律。作者用直观、易懂的讲解，引领读者去体会数论证明的不可思议与酣畅淋漓，在惊奇与畅快之中提升对数学的理解程度。";
+                    break;
+                case 'L3':
+                    content = "解决问题不仅需要处理由于多个素因子导致的复杂度（高维度），还要找到一个有效的方式来从一个数的因子分解转移到另一个，且这种转移不能太过复杂或费时（长度合适）。这要求我们找到一种在保持理论深度和计算可行性之间的平衡的方法。这种平衡是解决高复杂度数学问题的关键。这可以通过考虑19到54的乘积等于23到57的乘积来看到，由于这个方程要求两个高维度的路径相交，大多数解将需要较大的 m或 n 来允许 S的不连续性被抵消掉。";
+                    break;
+                case 'L4':
+                    content = "加法的规则是将元素相加。并生成对应于乘积的向量。例如，取2向量和3量，并将向量的每个元素相加，得到一个对应于数字6的向量，即2和3的乘积。";
+                    break;
+                case 'L5':
+                    content = "因子空间（factor space），一个高维的半模，每个素数都有自己的维度，我们可以用素数幂的列表（2,3,5,7....）来表示自然数，例如210的因子是2^1、3^1、5^1和7^1，因此因子空间的前4个元素都是1，从视觉上可以将这些视为指向空间的箭头或向量。因此，我们用箭头表示这个空间的成员，代表它在这个空间中的数字。在这个空间中，有两个关键操作（运算）：加法和缩放。";
+                    break;
+                case 'L6':
+                    content = "这些数字：210，720，175560 和17297280有什么共同点？如果你回答说它们都以零结尾，那你是对的，但更重要的是，它们是唯一已知的可以用两种不同的连续整数序列进行因式分解而且两种方式之间没有共同的数字。";
+                    break;
+                default:
+                    content = "未发布";
+            }
+
+            clickCounts[topic]++;
+            content += `\n\n点击指数：0.${clickCounts[topic]}`;
+            
+            contentArea.textContent = content;
+            contentArea.classList.add('visible');
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const toggleButton = document.getElementById('themeToggle');
+            body.classList.toggle('dark');
+            body.classList.toggle('light');
+
+            if (body.classList.contains('dark')) {
+                toggleButton.textContent = "切换到明亮主题";
+            } else {
+                toggleButton.textContent = "切换到黑暗主题";
+            }
+        }
+
+        function resetContent() {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.textContent = "点击上方按钮以显示内容。";
+            contentArea.classList.remove('visible');
+            
+            for (let key in clickCounts) {
+                clickCounts[key] = 0;
+            }
+        }
+    </script>
+    <script defer src="https://cdn.commento.io/js/commento.js"></script>
+</body>
+</html>
