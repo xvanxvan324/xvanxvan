@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据集</title>
+    <title>x博客</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,15 +31,16 @@
             margin-top: 50px;
         }
         .avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+            width: 150px; 
+            aspect-ratio: 1 / 1; /* 确保宽高比始终为1:1 */
+            border-radius: 50%; /* 保持圆形 */
             margin-right: 20px;
-            border: 3px solid currentColor;
+            border: 3px solid currentColor; 
             background-image: url('image.jpg');
-            background-size: cover;
-            background-position: center;
+            background-size: cover; 
+            background-position: center; 
         }
+
         .profile-info {
             text-align: left;
         }
