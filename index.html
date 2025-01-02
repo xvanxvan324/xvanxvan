@@ -23,16 +23,32 @@
             justify-content: center;
             margin-top: 50px;
         }
-        .avatar {
-            width: 150px; /* 设置固定的头像框宽度 */
-            height: 150px; /* 设置固定的头像框高度 */
-            border-radius: 50%; /* 使头像框为圆形 */
-            margin-right: 20px;
-            border: 3px solid #fff;
-            background-image: url('aaa.jpg'); /* 头像图片 */
-            background-size: cover; /* 保证背景图按比例缩放 */
-            background-position: center; /* 保证背景图居中显示 */
-        }
+       .avatar {
+    width: 150px; /* 默认大小 */
+    height: 150px; /* 默认大小 */
+    border-radius: 50%; /* 圆形 */
+    margin-right: 20px;
+    border: 3px solid #fff;
+    background-image: url('ab.jpg');
+    background-size: cover; /* 保持背景图按比例缩放 */
+    background-position: center; /* 确保背景图在框内居中 */
+}
+
+/* 响应式设计：对于小屏幕（手机端）调整头像大小 */
+@media (max-width: 768px) {
+    .avatar {
+        width: 120px;  /* 在手机端缩小头像框 */
+        height: 120px; /* 同上 */
+    }
+}
+
+@media (max-width: 480px) {
+    .avatar {
+        width: 100px;  /* 在更小的手机端进一步缩小 */
+        height: 100px; /* 同上 */
+    }
+}
+
         .profile-info {
             text-align: left;
         }
@@ -98,22 +114,6 @@
             margin-top: 20px;
             text-align: center;
         }
-
-        /* 响应式设计：对于小屏幕（手机端）调整布局 */
-        @media (max-width: 768px) {
-            /* 如果你希望头像在较小设备上仍然保持同样大小，可以去除任何相关的缩放 */
-            .avatar {
-                width: 150px;  /* 固定大小 */
-                height: 150px; /* 固定大小 */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .avatar {
-                width: 150px;  /* 固定大小 */
-                height: 150px; /* 固定大小 */
-            }
-        }
     </style>
 </head>
 <body>
@@ -152,35 +152,4 @@
             <!-- 添加音频播放器 -->
             <div class="audio-player-container">
                 <audio controls>
-                    <source src="https://your-path-to-audio-file.mp3" type="audio/mp3">
-                    您的浏览器不支持音频元素。
-                </audio>
-            </div>
-        </div>
-        <div class="document-list" id="option3">
-            <h3>Eye 文档</h3>
-            <div class="static-content">
-                <!-- 省略内容 -->
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // 显示或隐藏文档内容的函数
-        function toggleDocuments(option) {
-            // 获取所有文档列表
-            const allDocuments = document.querySelectorAll('.document-list');
-            // 隐藏所有文档
-            allDocuments.forEach(doc => {
-                doc.style.display = 'none';
-            });
-            // 显示被点击的文档
-            const selectedDocument = document.getElementById(option);
-            if (selectedDocument) {
-                selectedDocument.style.display = 'block';
-            }
-        }
-    </script>
-
-</body>
-</html>
+                    <source src="https://your-path-to-audio-file.mp3" type="a
