@@ -25,11 +25,11 @@
             transition: background-color 0.3s, color 0.3s;
         }
         body.dark {
-            background-color: black;
+            background: linear-gradient(135deg, #1e2a47, #3b2a45, #4e4b61, #303241);
             color: white;
         }
         body.light {
-            background-color: white;
+            background: linear-gradient(45deg, #fbc2eb, #a6c1ee, #c2e9fb, #e0c3fc);
             color: black;
         }
         .container {
@@ -117,6 +117,9 @@
         body.dark .theme-toggle {
             background: linear-gradient(45deg, #34495e, #2c3e50);
             color: white;
+        }
+        body.light .button-container {
+            border: 2px solid #c6e0f9;
         }
         body.light .button {
             background: linear-gradient(45deg, #3498db, #2980b9);
@@ -301,7 +304,7 @@
             }
         }
     </script>
-    <script defer src="https://cdn.commento.io/js/commento.js"></script>
+    <script defer src="music/commento.js"></script>
     <script>
        function toggleVisibility() {
             var playerContainer = document.getElementById('playerContainer');
