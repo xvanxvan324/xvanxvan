@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <meta property="og:title" content="Music Player" />
+    <meta property="og:type" content="website" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>x博客</title>
+    <link
+    rel="icon"
+    type="image/png"
+    href="music/img/logo.png"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="music/style.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,8 +110,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Dark Theme Button Styles */
         body.dark .button {
             background: linear-gradient(45deg, #8e44ad, #9b59b6);
             color: white;
@@ -129,10 +139,34 @@
             color: #ffffff;
             background-color: #333;
         }
+
+        .player-container {
+          position: fixed;
+          bottom: 0px;
+          padding-bottom: 0;
+          margin: 0;
+          display: none; /* 默认隐藏播放器内容 */
+        }
+        .toggle-button {
+            padding: 10px 20px;
+            position: fixed;
+            margin: 0;
+            top: 0;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle-button:hover {
+            background-color: rgb(29, 29, 29)
+        }
     </style>
 </head>
 <body class="dark">
-
+    <button class="toggle-button fixed-button" onclick="toggleVisibility()">背景音乐</button>
     <div class="container">
         <div class="profile-header">
             <div class="avatar"></div>
@@ -141,7 +175,9 @@
                 <div class="description">最混沌的骚乱也精密有致</div>
             </div>
         </div>
-
+        <div class="content" id="contentArea">
+            点击上方按钮以显示文章内容。
+        </div>
         <div class="button-container">
             <button class="button" onclick="showContent('L1')">高斯谈数论</button>
             <button class="button" onclick="showContent('L2')">远山启谈数论</button>
@@ -150,17 +186,54 @@
             <button class="button" onclick="showContent('L5')">因子空间</button>
             <button class="button" onclick="showContent('L6')">210，720，175560和17297280</button>
         </div>
-
         <button id="themeToggle" class="button theme-toggle" onclick="toggleTheme()">切换到明亮主题</button>
         <button class="del" onclick="resetContent()">关闭文章</button>
-
-        <div class="content" id="contentArea">
-            <!-- 默认内容 -->
-            点击上方按钮以显示文章内容。
-        </div>
         <div id="commento"></div>
     </div>
 
+    <div class="player-container" id="playerContainer">
+        
+        <div class="img-container" id="img-container">
+            <img src="music/img/logo.png" alt="Logo" />
+        </div>
+        <h2 id="title">歌曲标题</h2>
+        <h3 id="artist">艺术家</h3>
+        <audio id="audio" src=""></audio>
+        <div class="progress-container" id="progress-container">
+            <div class="progress" id="progress"></div>
+            <div class="duration-wrapper">
+                <span id="current-time">0:00</span>
+                <span id="duration">Waiting to play</span>
+            </div>
+        </div>
+        <div class="player-controls">
+            <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
+            <i class="fa-solid fa-play main-button" id="play" title="Play"></i>
+            <i class="fa-solid fa-forward" id="next" title="Next"></i>
+        </div>
+    </div>
+    <script>
+        // 设置默认的查询参数
+        const params = {
+            name: "Rey",
+            artist: "[xvanxvan]",
+            cover: "https://x.minmin.world/image.jpg",
+            link: "https://xvanxvan324.github.io/xvanxvan/zz.mp3"
+        };
+
+        // 获取当前页面的 URL
+        const currentUrl = window.location.href;
+
+        // 检查是否已有查询参数，如果没有就添加
+        const newUrl = currentUrl.includes('?') ? 
+            `${currentUrl}&name=${encodeURIComponent(params.name)}&artist=${encodeURIComponent(params.artist)}&cover=${encodeURIComponent(params.cover)}&link=${encodeURIComponent(params.link)}` :
+            `${currentUrl}?name=${encodeURIComponent(params.name)}&artist=${encodeURIComponent(params.artist)}&cover=${encodeURIComponent(params.cover)}&link=${encodeURIComponent(params.link)}`;
+
+        // 将新的 URL 应用到浏览器地址栏（不刷新页面）
+        history.replaceState(null, '', newUrl);
+        
+        console.log("新的 URL 是:", newUrl);  // 打印新的 URL 到控制台
+    </script>
     <script>
         let clickCounts = {
             L1: 0,
@@ -229,5 +302,27 @@
         }
     </script>
     <script defer src="https://cdn.commento.io/js/commento.js"></script>
+    <script>
+       function toggleVisibility() {
+            var playerContainer = document.getElementById('playerContainer');
+            
+            // 切换播放器显示与隐藏
+            if (playerContainer.style.display === 'none' || playerContainer.style.display === '') {
+                // 显示播放器内容
+                playerContainer.style.display = 'block';
+            } else {
+                // 隐藏播放器内容
+                playerContainer.style.display = 'none';
+            }
+        }
+
+        // 默认隐藏播放器
+        window.onload = function() {
+            var playerContainer = document.getElementById('playerContainer');
+            playerContainer.style.display = 'none';  // 确保页面加载时默认隐藏
+        };
+    </script>
+      <script src="music/script.js"></script>
+
 </body>
 </html>
