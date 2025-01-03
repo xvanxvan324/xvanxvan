@@ -1,161 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
+<html lang="en">
+  <head>
     <meta property="og:title" content="Music Player" />
     <meta property="og:type" content="website" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Rey博客</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Share</title>
     <link
-    rel="icon"
-    type="image/png"
-    href="music/img/logo.png"
+      rel="icon"
+      type="image/png"
+      href="./img/logo.png"
     />
     <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
-    <link rel="stylesheet" href="music/style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        body.dark {
-            background: linear-gradient(135deg, #1e2a47, #3b2a45, #4e4b61, #303241);
-            color: white;
-        }
-        body.light {
-            background: linear-gradient(45deg, #fbc2eb, #a6c1ee, #c2e9fb, #e0c3fc);
-            color: black;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-        .profile-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 50px;
-        }
-        .avatar {
-            width: 150px; 
-            aspect-ratio: 1 / 1; /* 确保宽高比始终为1:1 */
-            border-radius: 50%; /* 保持圆形 */
-            margin-right: 20px;
-            border: 3px solid currentColor; 
-            background-image: url('image.jpg');
-            background-size: cover; 
-            background-position: center; 
-        }
-
-        .profile-info {
-            text-align: left;
-        }
-        .nickname {
-            font-size: 30px;
-            margin-top: 10px;
-        }
-        .description {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-        .button {
-            padding: 12px 30px;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            margin: 10px;
-            display: inline-block;
-        }
-        .button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        .button:active {
-            transform: translateY(0);
-        }
-        .theme-toggle {
-            margin: 20px;
-        }
-        .button-container {
-            margin-top: 30px;
-            text-align: center;
-            border: 2px solid #555;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .content {
-            margin-top: 20px;
-            text-align: left;
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            min-height: 100px;
-            font-size: 18px;
-            white-space: pre-wrap;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-        .content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        body.dark .button {
-            background: linear-gradient(45deg, #8e44ad, #9b59b6);
-            color: white;
-        }
-        body.dark .theme-toggle {
-            background: linear-gradient(45deg, #34495e, #2c3e50);
-            color: white;
-        }
-        body.light .button-container {
-            border: 2px solid #c6e0f9;
-        }
-        body.light .button {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-        }
-        body.light .theme-toggle {
-            background: linear-gradient(45deg, #f1c40f, #f39c12);
-            color: white;
-        }
-        .del {
-            padding: 12px 30px;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            margin: 10px;
-            display: inline-block;
-            color: #ffffff;
-            background-color: #333;
-        }
-
         .player-container {
           position: fixed;
           bottom: 0px;
           padding-bottom: 0;
           margin: 0;
-          display: none; /* 默认隐藏播放器内容 */
         }
         .toggle-button {
             padding: 10px 20px;
-            position: fixed;
-            margin: 0;
-            top: 0;
-            background-color: black;
+            background-color: #e74c3c;
             color: white;
             border: none;
             border-radius: 5px;
@@ -164,168 +35,68 @@
         }
 
         .toggle-button:hover {
-            background-color: rgb(29, 29, 29)
+            background-color: #c0392b;
         }
     </style>
-</head>
-<body class="dark">
-    <button class="toggle-button fixed-button" onclick="toggleVisibility()">背景音乐</button>
-    <div class="container">
-        <div class="profile-header">
-            <div class="avatar"></div>
-            <div class="profile-info">
-                <div class="nickname">Rey</div>
-                <div class="description">最混沌的骚乱也精密有致</div>
-            </div>
-        </div>
-        <div class="content" id="contentArea">
-            点击上方按钮以显示文章内容。
-        </div>
-        <div class="button-container">
-            <button class="button" onclick="showContent('L1')">高斯谈数论</button>
-            <button class="button" onclick="showContent('L2')">远山启谈数论</button>
-            <button class="button" onclick="showContent('L3')">复杂度因子</button>
-            <button class="button" onclick="showContent('L4')">向量加法</button>
-            <button class="button" onclick="showContent('L5')">因子空间</button>
-            <button class="button" onclick="showContent('L6')">210，720，175560和17297280</button>
-        </div>
-        <button id="themeToggle" class="button theme-toggle" onclick="toggleTheme()">切换到明亮主题</button>
-        <button class="del" onclick="resetContent()">关闭文章</button>
-        <div id="commento"></div>
-    </div>
-
+  </head>
+  <body>
     <div class="player-container" id="playerContainer">
-        
-        <div class="img-container" id="img-container">
-            <img src="music/img/logo.png" alt="Logo" />
-        </div>
-        <h2 id="title">歌曲标题</h2>
-        <h3 id="artist">艺术家</h3>
-        <audio id="audio" src=""></audio>
-        <div class="progress-container" id="progress-container">
-            <div class="progress" id="progress"></div>
-            <div class="duration-wrapper">
-                <span id="current-time">0:00</span>
-                <span id="duration">Waiting to play</span>
-            </div>
-        </div>
-        <div class="player-controls">
-            <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
-            <i class="fa-solid fa-play main-button" id="play" title="Play"></i>
-            <i class="fa-solid fa-forward" id="next" title="Next"></i>
-        </div>
-    </div>
-    <script>
-        // 设置默认的查询参数
-        const params = {
-            name: "Rey",
-            artist: "[xvanxvan]",
-            cover: "https://x.minmin.world/image.jpg",
-            link: "https://xvanxvan324.github.io/xvanxvan/zz.mp3"
-        };
+      <div class="img-container" id="img-container">
+          <img src="./img/logo.png" alt="Logo" />
+      </div>
+      <h2 id="title">歌曲标题</h2>
+      <h3 id="artist">艺术家</h3>
+      <audio id="audio" src=""></audio>
+      <div class="progress-container" id="progress-container">
+          <div class="progress" id="progress"></div>
+          <div class="duration-wrapper">
+              <span id="current-time">0:00</span>
+              <span id="duration">Waiting to play</span>
+          </div>
+      </div>
+      <div class="player-controls">
+          <i class="fa-solid fa-backward" id="prev" title="Previous"></i>
+          <i class="fa-solid fa-play main-button" id="play" title="Play"></i>
+          <i class="fa-solid fa-forward" id="next" title="Next"></i>
+      </div>
+  </div>
 
-        // 获取当前页面的 URL
-        const currentUrl = window.location.href;
+  <!-- 缩放按钮固定底部 -->
+  <button class="toggle-button fixed-button" onclick="toggleVisibility()">背景音乐</button>
 
-        // 检查是否已有查询参数，如果没有就添加
-        const newUrl = currentUrl.includes('?') ? 
-            `${currentUrl}&name=${encodeURIComponent(params.name)}&artist=${encodeURIComponent(params.artist)}&cover=${encodeURIComponent(params.cover)}&link=${encodeURIComponent(params.link)}` :
-            `${currentUrl}?name=${encodeURIComponent(params.name)}&artist=${encodeURIComponent(params.artist)}&cover=${encodeURIComponent(params.cover)}&link=${encodeURIComponent(params.link)}`;
+  <script>
+      function toggleVisibility() {
+          // 获取需要隐藏/显示的元素
+          var imgContainer = document.getElementById('img-container');
+          var title = document.getElementById('title');
+          var artist = document.getElementById('artist');
+          var audio = document.getElementById('audio');
+          var progressContainer = document.getElementById('progress-container');
+          var playerControls = document.querySelector('.player-controls');
+          var playerContainer = document.getElementById('playerContainer');
 
-        // 将新的 URL 应用到浏览器地址栏（不刷新页面）
-        history.replaceState(null, '', newUrl);
-        
-        console.log("新的 URL 是:", newUrl);  // 打印新的 URL 到控制台
-    </script>
-    <script>
-        let clickCounts = {
-            L1: 0,
-            L2: 0,
-            L3: 0,
-            L4: 0,
-            L5: 0,
-            L6: 0
-        };
-
-        function showContent(topic) {
-            const contentArea = document.getElementById('contentArea');
-            let content;
-
-            switch (topic) {
-                case 'L1':
-                    content = "数学王子高斯(C. F. Gauss)有一句名言：“数学是科学的女王”；他又讲“数论是数学的王冠”。正如他所说，数论在数学中一直处于醒目的地位。18世纪的领袖数学家拉格朗日(J. L. Lagrange)有一个著名的定理，即任何一个正整数都能写成四个整数的平方和。这个定理是费马(Fermat)早年的猜测，与拉格朗日同时代的大数学家欧拉(L. Euler)曾经给出一个不完整的证明。第一个完整的证明是拉格朗日给出的。他在完成这个工作之后很感慨，在给欧拉的一封信中，他说：“对我来讲，算术是最难的。”这里，算术就是数论。这是拉格朗日对数论的评价。";
-                    break;
-                case 'L2':
-                    content = "远山启的《数学女王的邀请：初等数论入门》是初等数论入门的通俗科普读本，书中以身边的生活之事为例，由浅入深、生动形象地介绍了数的奇妙性质与规律。作者用直观、易懂的讲解，引领读者去体会数论证明的不可思议与酣畅淋漓，在惊奇与畅快之中提升对数学的理解程度。";
-                    break;
-                case 'L3':
-                    content = "解决问题不仅需要处理由于多个素因子导致的复杂度（高维度），还要找到一个有效的方式来从一个数的因子分解转移到另一个，且这种转移不能太过复杂或费时（长度合适）。这要求我们找到一种在保持理论深度和计算可行性之间的平衡的方法。这种平衡是解决高复杂度数学问题的关键。这可以通过考虑19到54的乘积等于23到57的乘积来看到，由于这个方程要求两个高维度的路径相交，大多数解将需要较大的 m或 n 来允许 S的不连续性被抵消掉。";
-                    break;
-                case 'L4':
-                    content = "加法的规则是将元素相加。并生成对应于乘积的向量。例如，取2向量和3量，并将向量的每个元素相加，得到一个对应于数字6的向量，即2和3的乘积。";
-                    break;
-                case 'L5':
-                    content = "因子空间（factor space），一个高维的半模，每个素数都有自己的维度，我们可以用素数幂的列表（2,3,5,7....）来表示自然数，例如210的因子是2^1、3^1、5^1和7^1，因此因子空间的前4个元素都是1，从视觉上可以将这些视为指向空间的箭头或向量。因此，我们用箭头表示这个空间的成员，代表它在这个空间中的数字。在这个空间中，有两个关键操作（运算）：加法和缩放。";
-                    break;
-                case 'L6':
-                    content = "这些数字：210，720，175560 和17297280有什么共同点？如果你回答说它们都以零结尾，那你是对的，但更重要的是，它们是唯一已知的可以用两种不同的连续整数序列进行因式分解而且两种方式之间没有共同的数字。";
-                    break;
-                default:
-                    content = "未发布";
-            }
-
-            clickCounts[topic]++;
-            content += `\n\n点击指数：0.${clickCounts[topic]}`;
-            
-            contentArea.textContent = content;
-            contentArea.classList.add('visible');
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const toggleButton = document.getElementById('themeToggle');
-            body.classList.toggle('dark');
-            body.classList.toggle('light');
-
-            if (body.classList.contains('dark')) {
-                toggleButton.textContent = "切换到明亮主题";
-            } else {
-                toggleButton.textContent = "切换到黑暗主题";
-            }
-        }
-
-        function resetContent() {
-            const contentArea = document.getElementById('contentArea');
-            contentArea.textContent = "点击上方按钮以显示内容。";
-            contentArea.classList.remove('visible');
-            
-            for (let key in clickCounts) {
-                clickCounts[key] = 0;
-            }
-        }
-    </script>
-    <script defer src="music/commento.js"></script>
-    <script>
-       function toggleVisibility() {
-            var playerContainer = document.getElementById('playerContainer');
-            
-            // 切换播放器显示与隐藏
-            if (playerContainer.style.display === 'none' || playerContainer.style.display === '') {
-                // 显示播放器内容
-                playerContainer.style.display = 'block';
-            } else {
-                // 隐藏播放器内容
-                playerContainer.style.display = 'none';
-            }
-        }
-
-        // 默认隐藏播放器
-        window.onload = function() {
-            var playerContainer = document.getElementById('playerContainer');
-            playerContainer.style.display = 'none';  // 确保页面加载时默认隐藏
-        };
-    </script>
-      <script src="music/script.js"></script>
-
-</body>
+          // 判断当前元素的显示状态
+          if (imgContainer.style.display === 'none') {
+              // 如果当前隐藏，恢复显示
+              imgContainer.style.display = 'block';
+              title.style.display = 'block';
+              artist.style.display = 'block';
+              audio.style.display = 'block';
+              progressContainer.style.display = 'block';
+              playerControls.style.display = 'block';
+              playerContainer.style.height = 'auto'; // 恢复原始高度
+          } else {
+              // 否则隐藏元素并缩小 player-container
+              imgContainer.style.display = 'none';
+              title.style.display = 'none';
+              artist.style.display = 'none';
+              audio.style.display = 'none';
+              progressContainer.style.display = 'none';
+              playerControls.style.display = 'none';
+              playerContainer.style.height = '0'; // 设置高度为 0，收起播放器
+          }
+      }
+  </script>
+    <script src="./script.js"></script>
+  </body>
 </html>
