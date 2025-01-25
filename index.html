@@ -215,12 +215,27 @@
             <i class="fa-solid fa-forward" id="next" title="Next"></i>
         </div>
     </div>
+    <div id="container" style="width: 100%;"></div>
+    <script src="ruffle/ruffle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle"></script>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("container");
+            container.appendChild(player);
+            player.load("Papa-Burgeria.swf");
+             // 确保播放器填满容器
+             player.style.width = "100%";
+        });
+    </script>
     <script>
         // 设置默认的查询参数
         const params = {
             name: "Rey",
             artist: "[xvanxvan]",
-            cover: "https://x.minmin.world/image.jpg",
+            cover: "image.jpg",
             link: "https://xvanxvan324.github.io/xvanxvan/zz.mp3"
         };
 
