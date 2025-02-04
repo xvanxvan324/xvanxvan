@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+    <url>
+        <loc>https://img.minmin.world</loc>
+        <image:image>
+            <image:loc>https://img.minmin.world/images/小彰鼠.jpg</image:loc>
+            <image:caption>小彰鼠，一只可爱的小鼠，毛茸茸的尾巴</image:caption>
+            <image:title>小彰鼠的图片</image:title>
+        </image:image>
+    </url>
+  
+</urlset>
