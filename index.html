@@ -5,7 +5,6 @@
     <meta property="og:type" content="website" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msvalidate.01" content="C2A962FD9828D705904CC2D1CCAC6C81" />
     <title>Rey博客</title>
     <link
     rel="icon"
@@ -216,21 +215,9 @@
             <i class="fa-solid fa-forward" id="next" title="Next"></i>
         </div>
     </div>
-    <div id="container" style="width: 100%;"></div>
-    <script src="ruffle/ruffle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle"></script>
-    <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.addEventListener("load", (event) => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            const container = document.getElementById("container");
-            container.appendChild(player);
-            player.load("Papa-Burgeria.swf");
-             // 确保播放器填满容器
-             player.style.width = "100%";
-        });
-    </script>
+
+
+
     <script>
         // 设置默认的查询参数
         const params = {
@@ -342,6 +329,7 @@
         };
     </script>
       <script src="music/script.js"></script>
+      <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
 
 </body>
 </html>
