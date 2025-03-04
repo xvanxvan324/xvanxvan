@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<body>
+    <h1>语音识别演示</h1>
+    <p id="output"></p>
+
+    <script>
+        // 检查浏览器是否支持SpeechRecognition API
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'zh-CN'; // 设置识别语言为中文
+            recognition.continuous = true; // 启用连续识别
+            recognition.interimResults = true; // 启用实时结果
+
+            // 用于判断是否已经弹出过提示
+            let hasSpokenHello = false;
+            let hasSpokenWhoAreYou = false;
+            let hasSpokenGoodMorning = false;
+
+            // 当识别到语音时触发
+            recognition.onresult = function(event) {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+
+                // 清空之前的文字记录
+                document.getElementById('output').textContent = transcript;
+
+                // 匹配关键字并弹出相应的提示框
+                if (transcript.includes('你好') && !hasSpokenHello) {
+                    alert('你也超级好的哦');
+                    hasSpokenHello = true;  // 标记“你好”已经触发过弹窗
+                } else if (transcript.includes('你是谁') && !hasSpokenWhoAreYou) {
+                    alert('我是暄鼠');
+                    hasSpokenWhoAreYou = true;  // 标记“你是谁”已经触发过弹窗
+                } else if (transcript.includes('早上号') && !hasSpokenGoodMorning) {
+                    alert('你早上');
+                    hasSpokenGoodMorning = true;  // 标记“早上号”已经触发过弹窗
+                }
+            };
+
+            // 启动语音识别
+            recognition.start();
+        } else {
+            alert('抱歉，您的浏览器不支持语音识别');
+        }
+    </script>
+</body>
+</html>
