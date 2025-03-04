@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器人朗读</title>
+</head>
+<body>
+    <h2>输入文本让机器人朗读</h2>
+    <input type="text" id="textInput" placeholder="输入要朗读的内容">
+    <button onclick="speakText()">朗读</button>
+
+    <script>
+        function speakText() {
+            let text = document.getElementById("textInput").value;
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "zh-CN"; // 设定语言为中文
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</body>
+</html>
