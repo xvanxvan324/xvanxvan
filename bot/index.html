@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speech Recognition</title>
+    <title>语音识别</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #startButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #output {
+            font-size: 20px;
+            margin-top: 20px;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
-    <h1>语音识别机器人演示</h1>
+    <h1>语音识别演示</h1>
+    <button id="startButton">点击开始语音识别</button>
     <p id="output"></p>
 
     <script>
@@ -48,7 +74,13 @@
             };
 
             // 启动语音识别
-            recognition.start();
+            function startRecognition() {
+                recognition.start();
+            }
+
+            // 绑定按钮事件
+            document.getElementById('startButton').addEventListener('click', startRecognition);
+
         } else {
             alert('抱歉，您的浏览器不支持语音识别');
         }
