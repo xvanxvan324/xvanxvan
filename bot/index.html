@@ -83,15 +83,71 @@
         }
     </style>
     <script>
-        let seconds = 0;
-        function updateTimer() {
-            seconds++;
-            let minutes = Math.floor(seconds / 60);
-            let secs = seconds % 60;
-            document.getElementById('timer').innerText = 
-                `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        // 语音播放函数
+        function speakText(text) {
+            let speech = new SpeechSynthesisUtterance(text);
+            let voices = window.speechSynthesis.getVoices();
+            let selectedVoice = voices.find(voice => voice.lang.includes("zh-CN")) || voices[0];
+            if (selectedVoice) {
+                speech.voice = selectedVoice;
+            }
+            speech.rate = 1; // 语速
+            speech.pitch = 1; // 音调
+            speech.volume = 1; // 音量
+            window.speechSynthesis.speak(speech);
         }
-        setInterval(updateTimer, 1000);
+
+        // 检查浏览器是否支持SpeechRecognition API
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'zh-CN'; // 设置识别语言为中文
+            recognition.continuous = true; // 启用连续识别
+            recognition.interimResults = true; // 启用实时结果
+
+            // 创建 JSON 格式的问答数据
+            const qaData = [
+                { question: '你好', answer: '你也超级好的哦' },
+                { question: '你是谁', answer: '我是暄鼠' },
+                { question: '怎么', answer: '嘿嘿，没有什么' },
+                { question: '什么', answer: '嘻嘻，喜欢你' },
+            ];
+
+            let lastTranscript = '';
+            const coolDownTime = 500; // 500毫秒冷却时间
+            let isCoolingDown = false;
+
+            // 当识别到语音时触发
+            recognition.onresult = function(event) {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+
+                if (transcript !== lastTranscript) {
+                    lastTranscript = transcript;
+                    if (isCoolingDown) return;
+
+                    qaData.forEach(item => {
+                        if (transcript.includes(item.question)) {
+                            speakText(item.answer);  // 朗读回答
+                            triggerCoolDown();
+                        }
+                    });
+                }
+            };
+
+            // 启动语音识别
+            recognition.start();
+
+            function triggerCoolDown() {
+                isCoolingDown = true;
+                setTimeout(() => { isCoolingDown = false; }, coolDownTime);
+            }
+        } else {
+            alert('抱歉，您的浏览器不支持语音识别');
+        }
     </script>
 </head>
 <body>
@@ -117,76 +173,5 @@
         </div>
         <div class="hide-text">Hide</div>
     </div>
-    <script>
-        // 检查浏览器是否支持SpeechRecognition API
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-        if (SpeechRecognition) {
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'zh-CN'; // 设置识别语言为中文
-            recognition.continuous = true; // 启用连续识别
-            recognition.interimResults = true; // 启用实时结果
-
-            // 用于判断是否已经弹出过提示
-            let hasSpokenHello = false;
-            let hasSpokenWhoAreYou = false;
-            let hasSpokenGoodMorning = false;
-
-            // 用于更新识别状态
-            let lastTranscript = '';
-
-            // 设置冷却时间（单位：毫秒）
-            const coolDownTime = 1000; // 1秒冷却时间
-            let isCoolingDown = false; // 冷却状态标识
-
-            // 创建 JSON 格式的问答数据
-            const qaData = [
-                { question: '你好', answer: '你也超级好的哦' },
-                { question: '你是谁', answer: '我是暄鼠' },
-                { question: '喂', answer: '怎么了嘛宝宝' },
-                { question: '嘿', answer: '嘻嘻，喜欢你' },
-                { question: '爱你', answer: '爱你哦哦' },
-                { question: '宝宝', answer: '爱你宝宝宝' }
-            ];
-
-            // 当识别到语音时触发
-            recognition.onresult = function(event) {
-                let transcript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    transcript += event.results[i][0].transcript;
-                }
-
-                // 判断是否发生了关键词变化
-                if (transcript !== lastTranscript) {
-                    lastTranscript = transcript;  // 更新识别的文本
-
-                    // 判断是否处于冷却状态
-                    if (isCoolingDown) return;
-
-                    // 匹配关键字并从 JSON 数据中获取相应的回答
-                    qaData.forEach(item => {
-                        if (transcript.includes(item.question)) {
-                            alert(item.answer);  // 弹出相应的回答
-                            triggerCoolDown(); // 启动冷却时间
-                        }
-                    });
-                }
-            };
-
-            // 启动语音识别
-            recognition.start();
-
-            // 设置冷却时间函数
-            function triggerCoolDown() {
-                isCoolingDown = true;
-                setTimeout(() => {
-                    isCoolingDown = false; // 冷却时间结束，可以再次触发弹窗
-                }, coolDownTime);
-            }
-
-        } else {
-            alert('抱歉，您的浏览器不支持语音识别');
-        }
-    </script>
 </body>
 </html>
